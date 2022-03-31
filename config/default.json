@@ -1,0 +1,33 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "se8eKirC1Ab+FjyXP0bpZs1hMoQ=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://pos.maesalab.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "\\username",
+      "passwordField": "password"
+    }
+  },
+  "postgres": "postgres://postgres@localhost:5432/pos",
+  "taxValue": 0.10
+}
