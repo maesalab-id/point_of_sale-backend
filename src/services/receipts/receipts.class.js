@@ -25,9 +25,10 @@ exports.Receipts = class Receipts extends Service {
     const receipt = await super.create({
       receipt_number: lastReceipt ? lastReceipt.receipt_number + 1 : 1,
       tax: this.app.get('taxValue'),
+      voucher_id: data.voucher_id,
       customer_id: data.customer_id
     });
-    data.items = data.items.map((d) => ({ ...d, receipt_id: receipt.id }));
+    data.items = data.items.map((d) => ({ ...d, receipt_id: receipt.id, discount: d.discount }));
     const receiptItems = await this.app.service('receipt-items').create(data.items);
     receipt.receipt_items = receiptItems;
 

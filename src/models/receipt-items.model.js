@@ -13,6 +13,10 @@ module.exports = function (app) {
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    discount: {
+      type: DataTypes.FLOAT,
+      allowNull: true
     }
   }, {
     hooks: {

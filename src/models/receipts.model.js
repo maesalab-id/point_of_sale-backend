@@ -27,6 +27,7 @@ module.exports = function (app) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     receipts.belongsTo(models.customers, { onDelete: 'cascade' });
+    receipts.belongsTo(models.vouchers, { onDelete: 'cascade' });
     receipts.hasMany(models.receipt_items, { onDelete: 'cascade' });
   };
 

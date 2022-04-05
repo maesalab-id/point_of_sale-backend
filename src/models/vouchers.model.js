@@ -5,25 +5,21 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const items = sequelizeClient.define('items', {
-    code: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
+  const vouchers = sequelizeClient.define('vouchers', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    price: {
-      type: DataTypes.DECIMAL,
-      allowNull: false
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    discount: {
+    value: {
       type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    start: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    end: {
+      type: DataTypes.DATEONLY,
       allowNull: false
     }
   }, {
@@ -35,11 +31,11 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  items.associate = function (models) {
-    items.belongsTo(models.categories, { onDelete: 'cascade' });
+  vouchers.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    vouchers.hasMany(models.receipts, { onDelete: 'cascade' });
   };
 
-  return items;
+  return vouchers;
 };
