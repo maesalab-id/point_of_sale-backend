@@ -24,7 +24,7 @@ module.exports = function (app) {
     },
     discount: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull: true
     }
   }, {
     hooks: {
