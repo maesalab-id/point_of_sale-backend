@@ -29,5 +29,6 @@
     }
   },
   "postgres": "postgres://postgres@localhost:5432/pos",
+  "mysql": "mysql://root:sirius@localhost:3306/poly-performance",
   "taxValue": 0.10
 }

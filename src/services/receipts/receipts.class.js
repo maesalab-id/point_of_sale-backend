@@ -7,8 +7,8 @@ exports.Receipts = class Receipts extends Service {
     this.app = app;
   }
   async create(data) {
-    for (let i = 0; i < data.length; i++) {
-      const d = data[i];
+    for (let i = 0; i < data.items.length; i++) {
+      const d = data.items[i];
       const item = await this.app.service('items').get(d.item_id);
       if (item.quantity < d.quantity) throw NotAcceptable(`Item quantity not enough at ${item.name}`);
     }
