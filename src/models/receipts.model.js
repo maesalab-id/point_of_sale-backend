@@ -29,6 +29,7 @@ module.exports = function (app) {
     receipts.belongsTo(models.customers, { onDelete: 'cascade' });
     receipts.belongsTo(models.vouchers, { onDelete: 'cascade' });
     receipts.hasMany(models.receipt_items, { onDelete: 'cascade' });
+    receipts.hasMany(models.returns, { onDelete: 'cascade' });
   };
 
   return receipts;

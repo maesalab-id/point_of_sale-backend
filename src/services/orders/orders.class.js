@@ -25,13 +25,20 @@ exports.Orders = class Orders extends Service {
     const orderList = await this.app.service('order-list').create(data.orders);
     order.order_list = orderList;
 
-    for (let i = 0; i < orderList.length; i++) {
-      const ol = orderList[i];
+    return order;
+  }
+  async patch(id, data) {
+    const orderList = await this.app.service('order-list').find({
+      query: { order_id: id }
+    });
+    console.log(orderList);
+    for (let i = 0; i < orderList.data.length; i++) {
+      const ol = orderList.data[i];
       const item = await this.app.service('items').get(ol.item_id);
       await this.app.service('items').patch(ol.item_id, {
         quantity: parseInt(item.quantity, 10) + parseInt(ol.quantity, 10)
       });
     }
-    return order;
+    return super.patch(id, { received: true });
   }
 };

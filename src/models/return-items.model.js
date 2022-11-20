@@ -5,13 +5,9 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const items = sequelizeClient.define('items', {
-    code: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING,
+  const returnItems = sequelizeClient.define('return_items', {
+    type: {
+      type: DataTypes.ENUM(['error', 'damaged']),
       allowNull: false
     },
     price: {
@@ -21,14 +17,6 @@ module.exports = function (app) {
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    bad_quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    discount: {
-      type: DataTypes.FLOAT,
-      allowNull: true
     }
   }, {
     hooks: {
@@ -39,11 +27,12 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  items.associate = function (models) {
-    items.belongsTo(models.categories, { onDelete: 'cascade' });
+  returnItems.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    returnItems.belongsTo(models.returns, { onDelete: 'cascade' });
+    returnItems.belongsTo(models.items, { onDelete: 'cascade' });
   };
 
-  return items;
+  return returnItems;
 };

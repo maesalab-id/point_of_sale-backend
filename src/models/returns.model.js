@@ -5,20 +5,7 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const orders = sequelizeClient.define('orders', {
-    order_number: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    tax: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    received: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    }
+  const returns = sequelizeClient.define('returns', {
   }, {
     hooks: {
       beforeCount(options) {
@@ -28,12 +15,12 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  orders.associate = function (models) {
+  returns.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    orders.belongsTo(models.vendors, { onDelete: 'cascade' });
-    orders.hasMany(models.order_list, { onDelete: 'cascade' });
+    returns.belongsTo(models.receipts, { onDelete: 'cascade' });
+    returns.hasMany(models.return_items, { onDelete: 'cascade' });
   };
 
-  return orders;
+  return returns;
 };

@@ -1,9 +1,11 @@
 const Sequelize = require('sequelize');
 
 module.exports = function (app) {
-  const connectionString = app.get('postgres');
+  const dbDriver = app.get('database');
+  const db_alter = app.get('db_alter');
+  const connectionString = app.get(dbDriver);
   const sequelize = new Sequelize(connectionString, {
-    dialect: 'postgres',
+    dialect: dbDriver,
     logging: false,
     define: {
       freezeTableName: true,
@@ -26,7 +28,7 @@ module.exports = function (app) {
     });
 
     // Sync to the database
-    app.set('sequelizeSync', sequelize.sync({ force: false }));
+    app.set('sequelizeSync', sequelize.sync({ force: false, alter: db_alter }));
 
     return result;
   };

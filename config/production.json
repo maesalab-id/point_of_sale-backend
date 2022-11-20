@@ -1,4 +1,7 @@
 {
   "host": "pos-app.feathersjs.com",
-  "port": "PORT"
+  "port": "PORT",
+  "mysql": "MYSQL_CONN_STRING",
+  "db_alter": "DB_ALTER",
+  "database": "DATABASE_DRIVER"
 }
