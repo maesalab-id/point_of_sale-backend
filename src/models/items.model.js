@@ -24,7 +24,8 @@ module.exports = function (app) {
     },
     bad_quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     },
     discount: {
       type: DataTypes.FLOAT,
