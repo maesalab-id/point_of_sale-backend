@@ -5,18 +5,10 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const receiptItems = sequelizeClient.define('receipt_items', {
-    price: {
-      type: DataTypes.DECIMAL,
-      allowNull: false
-    },
+  const sources = sequelizeClient.define('sources', {
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    discount: {
-      type: DataTypes.FLOAT,
-      allowNull: true
     }
   }, {
     hooks: {
@@ -27,13 +19,12 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  receiptItems.associate = function (models) {
+  sources.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    receiptItems.belongsTo(models.receipts, { onDelete: 'cascade' });
-    receiptItems.belongsTo(models.items, { onDelete: 'cascade' });
-    receiptItems.belongsTo(models.order_list, { onDelete: 'cascade' });
+    sources.belongsTo(models.items, { onDelete: 'cascade' });
+    sources.belongsTo(models.order_list, { onDelete: 'cascade' });
   };
 
-  return receiptItems;
+  return sources;
 };

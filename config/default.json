@@ -31,6 +31,6 @@
   "dbforce": false,
   "database": "postgres",
   "postgres": "postgres://postgres@localhost:5432/pos",
-  "mysql": "mysql://root:sirius@localhost:3306/poly-performance",
+  "mysql": "mysql://root:sirius@localhost:3306/pos",
   "taxValue": 0.10
 }

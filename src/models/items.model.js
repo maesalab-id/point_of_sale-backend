@@ -6,6 +6,10 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const items = sequelizeClient.define('items', {
+    image: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+    },
     code: {
       type: DataTypes.TEXT,
       allowNull: false
@@ -30,6 +34,11 @@ module.exports = function (app) {
     discount: {
       type: DataTypes.FLOAT,
       allowNull: true
+    },
+    raw: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     hooks: {
